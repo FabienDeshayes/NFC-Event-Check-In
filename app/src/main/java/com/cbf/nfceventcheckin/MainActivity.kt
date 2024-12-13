@@ -5,6 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.cbf.nfceventcheckin.ui.theme.NFCEventCheckInTheme
 
 class MainActivity : ComponentActivity() {
@@ -12,9 +15,18 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NFCEventCheckInTheme {
-                LoginScreen()
+                Navigation()
             }
         }
+    }
+}
+
+@Composable
+fun Navigation() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "login_screen") {
+        composable("login_screen") { LoginScreen(navController) }
+        composable("event_details_screen") { EventDetailsScreen() }
     }
 }
 
@@ -22,6 +34,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     NFCEventCheckInTheme {
-        LoginScreen()
+        EventDetailsScreen()
     }
 }

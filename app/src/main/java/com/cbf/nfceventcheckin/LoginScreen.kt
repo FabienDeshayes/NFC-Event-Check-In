@@ -29,9 +29,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavHostController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
@@ -78,8 +79,8 @@ fun LoginScreen() {
 
             Button(
                 onClick = {
-                    // TODO Handle login logic
-
+                    // TODO Handle login logic (for now navigate always)
+                    navController.navigate("event_details_screen")
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
