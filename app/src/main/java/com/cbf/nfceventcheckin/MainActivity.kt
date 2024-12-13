@@ -28,13 +28,15 @@ fun Navigation() {
         composable("login_screen") { LoginScreen(navController) }
         composable("event_details_screen") { EventDetailsScreen(navController) }
         composable("check_in_result_screen") { CheckInResultScreen() }
+//        composable("admin_screen") { AdminScreen(checkedInUsers) }
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    NFCEventCheckInTheme {
-//        EventDetailsScreen()
-//    }
-//}
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    val checkedInUsers = mutableListOf("John Doe", "Jane Smith", "Alice Johnson")
+    NFCEventCheckInTheme {
+        AdminScreen(checkedInUsers)
+    }
+}
