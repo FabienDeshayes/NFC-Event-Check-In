@@ -17,9 +17,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 @Composable
-fun EventDetailsScreen() {
+fun EventDetailsScreen(navController: NavController) {
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
@@ -63,6 +64,7 @@ fun EventDetailsScreen() {
             Button(
                 onClick = {
                     // todo Handle check-in
+                    navController.navigate("check_in_result_screen")
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {

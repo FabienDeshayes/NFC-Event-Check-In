@@ -26,14 +26,15 @@ fun Navigation() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "login_screen") {
         composable("login_screen") { LoginScreen(navController) }
-        composable("event_details_screen") { EventDetailsScreen() }
+        composable("event_details_screen") { EventDetailsScreen(navController) }
+        composable("check_in_result_screen") { CheckInResultScreen() }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    NFCEventCheckInTheme {
-        EventDetailsScreen()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun GreetingPreview() {
+//    NFCEventCheckInTheme {
+//        EventDetailsScreen()
+//    }
+//}
