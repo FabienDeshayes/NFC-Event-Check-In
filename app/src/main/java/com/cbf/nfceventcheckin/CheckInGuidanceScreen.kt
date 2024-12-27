@@ -30,7 +30,7 @@ fun CheckInGuidanceScreen() {
     ) {
         GifImage(
             modifier = Modifier
-                .size(250.dp)
+                .size(350.dp)
         )
         Spacer(modifier = Modifier.size(32.dp))
         Text(
@@ -67,7 +67,7 @@ fun GifImage(
     Image(
         painter = rememberAsyncImagePainter(
             ImageRequest.Builder(context)
-                .data(data = R.drawable.scan_prompt)
+                .data(data = R.drawable.nfc_prompt_hand)
                 .build(),
             imageLoader = imageLoader
         ),
