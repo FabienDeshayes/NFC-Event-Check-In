@@ -41,7 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 @Composable
-fun EventDetailsScreen(navController: NavController) {
+fun EventDetailsScreen(navController: NavController, event: Event) {
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -55,16 +55,16 @@ fun EventDetailsScreen(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             BackButton(navController)
-            EventHeader()
+            EventHeader(event)
             Spacer(modifier = Modifier.height(8.dp))
-            EventTime()
-            EventLocation()
+            EventTime(event)
+            EventLocation(event)
             Spacer(modifier = Modifier.height(8.dp))
-            EventDescription()
+            EventDescription(event)
             Spacer(modifier = Modifier.height(16.dp))
-            AgendaSection()
+            AgendaSection(event)
             Spacer(modifier = Modifier.height(8.dp))
-            ContactInformationSection()
+            ContactInformationSection(event)
             Spacer(modifier = Modifier.weight(1f))
             ActionButtons(navController)
         }
@@ -88,7 +88,7 @@ fun BackButton(navController: NavController) {
 }
 
 @Composable
-fun EventHeader() {
+fun EventHeader(event: Event) {
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
@@ -98,7 +98,7 @@ fun EventHeader() {
         elevation = CardDefaults.elevatedCardElevation(8.dp)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_events_image),
+            painter = painterResource(id = event.imageResource),
             contentDescription = "Event Image",
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
@@ -108,14 +108,14 @@ fun EventHeader() {
     Spacer(modifier = Modifier.height(16.dp))
 
     Text(
-        text = "Coding Black Females Meetup",
+        text = event.title,
         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
         color = MaterialTheme.colorScheme.onBackground
     )
 }
 
 @Composable
-fun EventTime() {
+fun EventTime(event: Event) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(vertical = 4.dp)
@@ -128,7 +128,7 @@ fun EventTime() {
         )
         Spacer(modifier = Modifier.width(8.dp))
         Text(
-            text = "24 Jan | 12:30 PM",
+            text = event.time,
             style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold),
             color = MaterialTheme.colorScheme.onBackground
         )
@@ -136,9 +136,9 @@ fun EventTime() {
 }
 
 @Composable
-fun EventDescription() {
+fun EventDescription(event: Event) {
     Text(
-        text = "Join us for an exciting event where you'll learn and have fun. We're bringing together inspiring speakers and industry leaders to discuss the future of tech for black women.",
+        text = event.description,
         style = MaterialTheme.typography.bodyMedium,
         color = MaterialTheme.colorScheme.onBackground,
         textAlign = TextAlign.Left
@@ -146,7 +146,7 @@ fun EventDescription() {
 }
 
 @Composable
-fun AgendaSection() {
+fun AgendaSection(event: Event) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
             text = "Agenda",
@@ -156,14 +156,7 @@ fun AgendaSection() {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        val agendaItems = listOf(
-            "Opening Remarks",
-            "Keynote Speech",
-            "Networking Session",
-            "Closing Remarks"
-        )
-
-        agendaItems.forEach { agendaItem ->
+        event.agenda.forEach { agendaItem ->
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(vertical = 4.dp)
@@ -186,7 +179,7 @@ fun AgendaSection() {
 }
 
 @Composable
-fun EventLocation() {
+fun EventLocation(event: Event) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(vertical = 4.dp)
@@ -199,7 +192,7 @@ fun EventLocation() {
         )
         Spacer(modifier = Modifier.width(8.dp))
         Text(
-            text = "Tech Hub, Downtown City, 123 Tech St.",
+            text = event.location,
             style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold),
             color = MaterialTheme.colorScheme.onBackground
         )
@@ -207,7 +200,7 @@ fun EventLocation() {
 }
 
 @Composable
-fun ContactInformationSection() {
+fun ContactInformationSection(event: Event) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
             text = "Contact Information",
@@ -226,7 +219,7 @@ fun ContactInformationSection() {
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = "Email: info@codingblackfemales.com",
+            text = "Email: ${event.contactEmail}",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onBackground
         )
@@ -234,7 +227,7 @@ fun ContactInformationSection() {
         Spacer(modifier = Modifier.height(4.dp))
 
         Text(
-            text = "Phone: +1 234 567 890",
+            text = "Phone: ${event.contactPhone}",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onBackground
         )
