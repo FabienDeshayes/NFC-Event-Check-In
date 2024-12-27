@@ -34,6 +34,8 @@ fun LoginScreen(navController: NavHostController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
+    var isValid by remember { mutableStateOf(true) }
+    var showErrorMessages by remember { mutableStateOf(false) }
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -52,7 +54,13 @@ fun LoginScreen(navController: NavHostController) {
                 onValueChange = { email = it },
                 label = { Text("Email") },
                 modifier = Modifier.fillMaxWidth(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                isError = !isValid && email.isEmpty(),
+                supportingText = {
+                    if (!isValid && email.isEmpty()) {
+                        Text(text = "Email is required", color = MaterialTheme.colorScheme.error)
+                    }
+                }
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -64,6 +72,12 @@ fun LoginScreen(navController: NavHostController) {
                 modifier = Modifier.fillMaxWidth(),
                 visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                isError = !isValid && password.isEmpty(),
+                supportingText = {
+                    if (!isValid && password.isEmpty()) {
+                        Text(text = "Password is required", color = MaterialTheme.colorScheme.error)
+                    }
+                },
                 trailingIcon = {
                     val icon = if (passwordVisible)
                         painterResource(R.drawable.baseline_visibility_off_24) else painterResource(R.drawable.baseline_visibility_24)
@@ -78,8 +92,14 @@ fun LoginScreen(navController: NavHostController) {
 
             Button(
                 onClick = {
-                    // TODO Handle login logic (for now navigate always)
-                    navController.navigate("event_details_screen")
+                    if (email.isEmpty() || password.isEmpty()) {
+                        isValid = false
+                        showErrorMessages = true
+                    } else {
+                        isValid = true
+                        showErrorMessages = false
+                        navController.navigate("event_details_screen")
+                    }
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
