@@ -1,5 +1,6 @@
 package com.cbf.nfceventcheckin
 
+import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -22,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -36,6 +38,9 @@ fun LoginScreen(navController: NavHostController) {
     var passwordVisible by remember { mutableStateOf(false) }
     var isValid by remember { mutableStateOf(true) }
     var showErrorMessages by remember { mutableStateOf(false) }
+
+    val sharedPreferences = LocalContext.current.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+    val editor = sharedPreferences.edit()
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -98,6 +103,11 @@ fun LoginScreen(navController: NavHostController) {
                     } else {
                         isValid = true
                         showErrorMessages = false
+
+                        editor.putBoolean("is_logged_in", true)
+                        editor.putString("email", email)
+                        editor.apply()
+
                         navController.navigate("event_details_screen")
                     }
                 },

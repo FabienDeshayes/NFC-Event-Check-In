@@ -77,7 +77,7 @@ fun EventDetailsScreen(navController: NavController) {
             Button(
                 onClick = {
                     // todo Handle check-in
-                    navController.navigate("check_in_result_screen")
+//                    navController.navigate("check_in_result_screen")
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
