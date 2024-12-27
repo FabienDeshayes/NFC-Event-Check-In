@@ -15,6 +15,7 @@ fun Navigation(isLoggedIn: Boolean, isCheckedIn: Boolean) {
         composable("login_screen") { LoginScreen(navController) }
         composable("event_details_screen") { EventDetailsScreen(navController) }
         composable("check_in_result_screen") { CheckInResultScreen(navController) }
+        composable("check_in_guidance_screen") { CheckInGuidanceScreen() }
 //        composable("admin_screen") { AdminScreen(checkedInUsers) }
     }
 }

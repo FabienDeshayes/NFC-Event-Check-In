@@ -76,8 +76,7 @@ fun EventDetailsScreen(navController: NavController) {
             Spacer(modifier = Modifier.weight(1.0f)) // fill height with spacer
             Button(
                 onClick = {
-                    // todo Handle check-in
-//                    navController.navigate("check_in_result_screen")
+                    navController.navigate("check_in_guidance_screen")
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
