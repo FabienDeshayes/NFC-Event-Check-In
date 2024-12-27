@@ -76,6 +76,14 @@ fun EventDetailsScreen(navController: NavController) {
             Spacer(modifier = Modifier.weight(1.0f)) // fill height with spacer
             Button(
                 onClick = {
+                    navController.navigate("admin_screen")
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("View Checked In Users")
+            }
+            Button(
+                onClick = {
                     navController.navigate("check_in_guidance_screen")
                 },
                 modifier = Modifier.fillMaxWidth()
