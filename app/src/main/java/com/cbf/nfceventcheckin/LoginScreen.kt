@@ -108,7 +108,7 @@ fun LoginScreen(navController: NavHostController) {
                         editor.putString("email", email)
                         editor.apply()
 
-                        navController.navigate("event_details_screen")
+                        navController.navigate("event_list_screen")
                     }
                 },
                 modifier = Modifier.fillMaxWidth()
