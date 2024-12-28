@@ -2,6 +2,7 @@ package com.cbf.nfceventcheckin
 
 val events = listOf(
     Event(
+        tagSerialNumber = "04:4E:58:22:C7:19:90",
         title = "Coding Black Females Meetup",
         time = "24 Jan | 12:30 PM",
         description = "Join us for an exciting event where you'll learn and have fun. We're bringing together inspiring speakers and industry leaders to discuss the future of tech for black women.",
@@ -17,6 +18,7 @@ val events = listOf(
         imageResource = R.drawable.ic_events_image
     ),
     Event(
+        tagSerialNumber = "04:4E:58:22:C7:19:55",
         title = "Tech Innovators Conference 2024",
         time = "10 Feb | 9:00 AM",
         description = "Join top tech experts as they share the latest innovations in the industry. A must-attend for aspiring engineers and entrepreneurs.",
@@ -27,12 +29,13 @@ val events = listOf(
             "Networking Lunch",
             "Closing Ceremony"
         ),
-        location = "Tech Arena, Silicon Valley, CA",
+        location = "Tech Arena, Silicon Valley, London",
         contactEmail = "contact@techinnovators.com",
         contactPhone = "+1 408 555 1234",
         imageResource = R.drawable.img1
     ),
     Event(
+        tagSerialNumber = "04:4E:58:22:C7:19:55",
         title = "Designing for the Future Workshop",
         time = "15 Feb | 2:00 PM",
         description = "A hands-on workshop for designers to explore new tools and techniques for creating innovative user experiences.",
@@ -42,12 +45,13 @@ val events = listOf(
             "Interactive Prototyping",
             "Q&A and Wrap-up"
         ),
-        location = "Design Hub, Los Angeles, CA",
+        location = "Design Hub, Los Angeles, Birmingham",
         contactEmail = "info@designfutureworkshop.com",
-        contactPhone = "+1 323 555 4567",
+        contactPhone = "+44 753 555 4567",
         imageResource = R.drawable.img4
     ),
     Event(
+        tagSerialNumber = "04:4E:58:22:C7:19:55",
         title = "AI and Data Science Symposium",
         time = "20 Feb | 10:00 AM",
         description = "A deep dive into the intersection of Artificial Intelligence and Data Science. Learn from the leaders in the field.",
@@ -63,6 +67,7 @@ val events = listOf(
         imageResource = R.drawable.img3
     ),
     Event(
+        tagSerialNumber = "04:4E:58:22:C7:19:55",
         title = "Blockchain for Beginners Seminar",
         time = "25 Feb | 11:00 AM",
         description = "Learn the basics of blockchain technology and how it's transforming industries such as finance, healthcare, and logistics.",
@@ -78,6 +83,7 @@ val events = listOf(
         imageResource = R.drawable.img2
     ),
     Event(
+        tagSerialNumber = "04:4E:58:22:C7:19:55",
         title = "Women in Tech Summit 2024",
         time = "5 Mar | 8:30 AM",
         description = "Empowering women in the tech industry with sessions, mentorship, and networking opportunities. Celebrate the power of diversity in tech.",
@@ -93,6 +99,7 @@ val events = listOf(
         imageResource = R.drawable.ic_events_image
     ),
     Event(
+        tagSerialNumber = "04:4E:58:22:C7:19:55",
         title = "Startup Pitch Competition",
         time = "12 Mar | 6:00 PM",
         description = "A competition where early-stage startups pitch their ideas to a panel of judges and potential investors.",
@@ -108,6 +115,7 @@ val events = listOf(
         imageResource = R.drawable.img1
     ),
     Event(
+        tagSerialNumber = "04:4E:58:22:C7:19:55",
         title = "Digital Marketing Expo",
         time = "18 Mar | 9:30 AM",
         description = "Explore the latest trends in digital marketing. Learn how to leverage social media, SEO, and content marketing to grow your brand.",
@@ -123,6 +131,7 @@ val events = listOf(
         imageResource = R.drawable.img4
     ),
     Event(
+        tagSerialNumber = "04:4E:58:22:C7:19:55",
         title = "Photography and Videography Masterclass",
         time = "22 Mar | 1:00 PM",
         description = "A masterclass for aspiring photographers and videographers, focusing on advanced techniques, lighting, and post-production.",
@@ -138,6 +147,7 @@ val events = listOf(
         imageResource = R.drawable.img3
     ),
     Event(
+        tagSerialNumber = "04:4E:58:22:C7:19:55",
         title = "Future of Work Forum",
         time = "2 Apr | 10:00 AM",
         description = "A forward-looking forum on how technology is shaping the future of work. Discussions on remote work, AI, and automation.",
@@ -153,6 +163,7 @@ val events = listOf(
         imageResource = R.drawable.img2
     ),
     Event(
+        tagSerialNumber = "04:4E:58:22:C7:19:55",
         title = "Creative Coding Bootcamp",
         time = "15 Apr | 12:00 PM",
         description = "A bootcamp for aspiring coders to learn creative coding techniques using JavaScript, p5.js, and other web technologies.",

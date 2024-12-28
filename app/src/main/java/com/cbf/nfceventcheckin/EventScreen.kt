@@ -66,7 +66,7 @@ fun EventDetailsScreen(navController: NavController, event: Event) {
             Spacer(modifier = Modifier.height(8.dp))
             ContactInformationSection(event)
             Spacer(modifier = Modifier.weight(1f))
-            ActionButtons(navController)
+            ActionButtons(navController, event)
         }
     }
 }
@@ -235,13 +235,13 @@ fun ContactInformationSection(event: Event) {
 }
 
 @Composable
-fun ActionButtons(navController: NavController) {
+fun ActionButtons(navController: NavController, event: Event) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(
-            onClick = { navController.navigate("admin_screen") },
+            onClick = { navController.navigate("admin_screen/${event.tagSerialNumber}") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),

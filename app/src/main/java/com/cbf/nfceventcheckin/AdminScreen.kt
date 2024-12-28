@@ -10,12 +10,25 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun AdminScreen(checkedInUsers: List<String>) {
+fun AdminScreen(tagSerialNumber: String) {
+    val context = LocalContext.current
+    val dbHelper = DatabaseHelper(context)
+    val checkedInEmails = remember { mutableStateListOf<String>() }
+
+    LaunchedEffect(Unit) {
+        checkedInEmails.clear()
+        checkedInEmails.addAll(dbHelper.getAllCheckedInEmails(tagSerialNumber))
+    }
+
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
@@ -28,7 +41,7 @@ fun AdminScreen(checkedInUsers: List<String>) {
             Spacer(modifier = Modifier.height(16.dp))
             Text(text = "Checked In Users:", style = MaterialTheme.typography.titleSmall)
             Spacer(modifier = Modifier.height(8.dp))
-            for (user in checkedInUsers) {
+            for (user in checkedInEmails) {
                 Text(text = "- $user")
                 Spacer(modifier = Modifier.height(4.dp))
             }

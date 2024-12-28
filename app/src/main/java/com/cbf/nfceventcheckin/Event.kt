@@ -1,6 +1,7 @@
 package com.cbf.nfceventcheckin
 
 data class Event(
+    val tagSerialNumber: String,
     val title: String,
     val time: String,
     val description: String,

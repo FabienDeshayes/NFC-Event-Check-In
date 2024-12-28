@@ -44,13 +44,15 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     @SuppressLint("Range")
-    fun getAllCheckedInEmails(): List<String> {
+    fun getAllCheckedInEmails(serialNumber: String): List<String> {
         val emailList = mutableListOf<String>()
         val db = readableDatabase
         val cursor = db.query(
             TABLE_NAME,
             arrayOf(COLUMN_EMAIL),
-            null, null, null, null, null
+            "$COLUMN_SERIAL_NUMBER = ?",
+            arrayOf(serialNumber),
+            null, null, null
         )
 
         if (cursor != null && cursor.moveToFirst()) {
