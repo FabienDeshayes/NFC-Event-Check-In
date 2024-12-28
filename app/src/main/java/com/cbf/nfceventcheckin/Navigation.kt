@@ -38,7 +38,7 @@ fun Navigation(isLoggedIn: Boolean, isCheckedIn: Boolean) {
                 backStackEntry.arguments?.getString("tagSerialNumber") ?: return@composable
             val tag = events.find { it.tagSerialNumber == tagSerialNumber }
             tag?.let {
-                AdminScreen(tagSerialNumber = it.tagSerialNumber)
+                AdminScreen(event = it)
             }
         }
     }
