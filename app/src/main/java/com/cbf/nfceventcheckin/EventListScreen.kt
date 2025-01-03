@@ -51,13 +51,12 @@ fun EventListScreen(events: List<Event>, navController: NavController) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 16.dp)
                 ) {
 
                     CheckInGuidanceVideoPlayer(
                         modifier = Modifier
                             .size(350.dp)
-                            .padding(16.dp)
+                            .padding(32.dp)
                             .clip(CircleShape)
                             .border(4.dp, MaterialTheme.colorScheme.primary, CircleShape)
                     )
@@ -85,7 +84,7 @@ fun EventListScreen(events: List<Event>, navController: NavController) {
                         text = "Or",
                         style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.SemiBold),
                         color = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier.padding(horizontal = 8.dp)
+                        modifier = Modifier.padding(horizontal = 16.dp)
                     )
                     HorizontalDivider(
                         modifier = Modifier.weight(1f),

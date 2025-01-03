@@ -1,15 +1,14 @@
 package com.cbf.nfceventcheckin
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 
 @Composable
-fun Navigation(isLoggedIn: Boolean, isCheckedIn: Boolean) {
-    val navController = rememberNavController()
+fun Navigation(isLoggedIn: Boolean, isCheckedIn: Boolean, navController: NavHostController) {
     NavHost(
         navController = navController,
         startDestination = when {
@@ -20,7 +19,7 @@ fun Navigation(isLoggedIn: Boolean, isCheckedIn: Boolean) {
     ) {
         composable("login_screen") { LoginScreen(navController) }
         composable("event_list_screen") { EventListScreen(events, navController) }
-        composable("check_in_result_screen") { CheckInResultScreen(navController) }
+        composable("check_in_result_screen") { CheckInResultScreen() }
         composable("check_in_guidance_screen") { CheckInGuidanceScreen() }
         composable("event_details_screen/{eventTitle}",
             arguments = listOf(navArgument("eventTitle") { type = NavType.StringType })
