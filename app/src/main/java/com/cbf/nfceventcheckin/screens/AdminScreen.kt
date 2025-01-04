@@ -1,4 +1,4 @@
-package com.cbf.nfceventcheckin
+package com.cbf.nfceventcheckin.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -22,6 +22,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.cbf.nfceventcheckin.DatabaseHelper
+import com.cbf.nfceventcheckin.Event
 
 @Composable
 fun AdminScreen(event: Event) {

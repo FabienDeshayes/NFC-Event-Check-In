@@ -1,4 +1,4 @@
-package com.cbf.nfceventcheckin
+package com.cbf.nfceventcheckin.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -31,6 +31,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.cbf.nfceventcheckin.Event
 
 @Composable
 fun EventListScreen(events: List<Event>, navController: NavController) {

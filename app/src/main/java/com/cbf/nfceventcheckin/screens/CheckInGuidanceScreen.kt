@@ -1,4 +1,4 @@
-package com.cbf.nfceventcheckin
+package com.cbf.nfceventcheckin.screens
 
 import android.net.Uri
 import android.view.SurfaceView
@@ -32,6 +32,7 @@ import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
+import com.cbf.nfceventcheckin.R
 
 @Composable
 fun CheckInGuidanceScreen() {

@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.cbf.nfceventcheckin.screens.launchSignOut
 import com.cbf.nfceventcheckin.ui.theme.NFCEventCheckInTheme
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth

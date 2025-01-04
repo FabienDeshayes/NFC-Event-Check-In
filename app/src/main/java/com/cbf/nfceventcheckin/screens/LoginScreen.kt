@@ -1,4 +1,4 @@
-package com.cbf.nfceventcheckin
+package com.cbf.nfceventcheckin.screens
 
 import android.content.Context
 import android.content.Intent
@@ -49,6 +49,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import com.cbf.nfceventcheckin.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException

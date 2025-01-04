@@ -8,6 +8,12 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.cbf.nfceventcheckin.screens.AdminScreen
+import com.cbf.nfceventcheckin.screens.CheckInGuidanceScreen
+import com.cbf.nfceventcheckin.screens.CheckInResultScreen
+import com.cbf.nfceventcheckin.screens.EventDetailsScreen
+import com.cbf.nfceventcheckin.screens.EventListScreen
+import com.cbf.nfceventcheckin.screens.LoginScreen
 
 @Composable
 fun Navigation(
