@@ -117,7 +117,7 @@ class MainActivity : ComponentActivity() {
                 }
             },
             actions = {
-                IconButton(onClick = { onSignOut(applicationContext, auth, sharedPreferences, isLoggedInState, navController) }) {
+                IconButton(onClick = { launchSignOut(applicationContext, auth, sharedPreferences, isLoggedInState, navController) }) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ExitToApp,
                         contentDescription = "Sign Out",
