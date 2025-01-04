@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NFC Event Check In</string>
+    <string name="public_server_client_id">125734888618-rlhhlv755gp7u338gd99j862sekef7fu.apps.googleusercontent.com</string>
 </resources>

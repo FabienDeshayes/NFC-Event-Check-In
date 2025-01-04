@@ -1,6 +1,8 @@
 package com.cbf.nfceventcheckin
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -8,7 +10,20 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 
 @Composable
-fun Navigation(isLoggedIn: Boolean, isCheckedIn: Boolean, navController: NavHostController) {
+fun Navigation(
+    isLoggedIn: Boolean,
+    isCheckedIn: Boolean,
+    navController: NavHostController,
+    isLoggedInState: MutableState<Boolean>
+) {
+    LaunchedEffect(isLoggedInState.value) {
+        if (isLoggedInState.value) {
+            navController.navigate("event_list_screen") {
+                popUpTo("login_screen") { inclusive = true }
+            }
+        }
+    }
+
     NavHost(
         navController = navController,
         startDestination = when {
@@ -17,7 +32,7 @@ fun Navigation(isLoggedIn: Boolean, isCheckedIn: Boolean, navController: NavHost
             else -> "login_screen"
         }
     ) {
-        composable("login_screen") { LoginScreen(navController) }
+        composable("login_screen") { LoginScreen(navController, isLoggedInState = isLoggedInState) }
         composable("event_list_screen") { EventListScreen(events, navController) }
         composable("check_in_result_screen") { CheckInResultScreen() }
         composable("check_in_guidance_screen") { CheckInGuidanceScreen() }

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "125734888618",
+    "project_id": "nfc-event-check-in-a38a1",
+    "storage_bucket": "nfc-event-check-in-a38a1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125734888618:android:dd71cc284084dc14001cd3",
+        "android_client_info": {
+          "package_name": "com.cbf.nfceventcheckin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "125734888618-5879hied8h50j72sv3aibpglutgvttlc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cbf.nfceventcheckin",
+            "certificate_hash": "3d70b3ceaf992951f2999a5fc9f956de1fc473f3"
+          }
+        },
+        {
+          "client_id": "125734888618-rlhhlv755gp7u338gd99j862sekef7fu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7z079V1MuEI_a8EWpTKYe9ejQN93puLc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "125734888618-rlhhlv755gp7u338gd99j862sekef7fu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

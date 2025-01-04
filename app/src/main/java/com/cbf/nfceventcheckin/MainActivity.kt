@@ -11,6 +11,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,24 +22,33 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.cbf.nfceventcheckin.ui.theme.NFCEventCheckInTheme
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 
 class MainActivity : ComponentActivity() {
     private var nfcAdapter: NfcAdapter? = null
     private lateinit var sharedPreferences: SharedPreferences
-    private var isLoggedIn: Boolean = false
     private var isCheckedIn: Boolean = false
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        isLoggedIn = sharedPreferences.getBoolean("is_logged_in", false)
+        auth = Firebase.auth
+
+        val isLoggedInState = mutableStateOf(
+            sharedPreferences.getBoolean("is_logged_in", false)
+        )
 
         setContent {
             val navController = rememberNavController()
@@ -46,8 +56,8 @@ class MainActivity : ComponentActivity() {
             NFCEventCheckInTheme {
                 Scaffold(
                     topBar = {
-                        if (isLoggedIn) {
-                            TopAppBar(navController)
+                        if (isLoggedInState.value) {
+                            TopAppBar(navController, isLoggedInState)
                         }
                     },
                     content = { padding ->
@@ -56,9 +66,10 @@ class MainActivity : ComponentActivity() {
                             color = MaterialTheme.colorScheme.background,
                         ) {
                             Navigation(
-                                isLoggedIn = isLoggedIn,
+                                isLoggedIn = isLoggedInState.value,
                                 isCheckedIn = isCheckedIn,
-                                navController
+                                navController,
+                                isLoggedInState
                             )
                         }
                     }
@@ -80,7 +91,8 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun TopAppBar(
-        navController: NavController
+        navController: NavController,
+        isLoggedInState: MutableState<Boolean>
     ) {
         val currentBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = currentBackStackEntry?.destination?.route
@@ -102,6 +114,15 @@ class MainActivity : ComponentActivity() {
                             tint = MaterialTheme.colorScheme.primary
                         )
                     }
+                }
+            },
+            actions = {
+                IconButton(onClick = { onSignOut(applicationContext, auth, sharedPreferences, isLoggedInState, navController) }) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ExitToApp,
+                        contentDescription = "Sign Out",
+                        tint = MaterialTheme.colorScheme.primary
+                    )
                 }
             }
         )

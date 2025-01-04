@@ -18,6 +18,8 @@ Coming soon
 - Material Design 3
 - Room Database 
 - NFC Technology 
+- ExoPlayer
+- Firebase Authentication
 
 ## Requirements:
 - Android Device with NFC Support
