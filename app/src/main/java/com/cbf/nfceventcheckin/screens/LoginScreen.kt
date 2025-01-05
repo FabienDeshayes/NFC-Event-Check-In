@@ -152,13 +152,7 @@ fun SignInWithEmail(navController: NavHostController, isLoggedInState: MutableSt
             } else {
                 isValid = true
                 showErrorMessages = false
-
-                editor.putBoolean("is_logged_in", true)
-                editor.putString("email", email)
-                editor.apply()
-                isLoggedInState.value = true
-
-                navController.navigate("event_list_screen")
+                onSuccessfulLogin(editor, email, isLoggedInState, navController)
             }
         },
         modifier = Modifier
@@ -225,11 +219,7 @@ fun rememberGoogleSignInLauncher(
             auth.signInWithCredential(credential)
                 .addOnCompleteListener { authTask ->
                     if (authTask.isSuccessful) {
-                        editor.putBoolean("is_logged_in", true)
-                        editor.putString("email", account.email)
-                        editor.apply()
-                        isLoggedInState.value = true
-                        navController.navigate("event_list_screen")
+                        account.email?.let { onSuccessfulLogin(editor, it, isLoggedInState, navController) }
                     } else {
                         Toast.makeText(context, "Authentication failed", Toast.LENGTH_SHORT).show()
                     }
@@ -241,7 +231,26 @@ fun rememberGoogleSignInLauncher(
     }
 }
 
-fun launchGoogleSignIn(
+private fun onSuccessfulLogin(
+    editor: SharedPreferences.Editor,
+    email: String,
+    isLoggedInState: MutableState<Boolean>,
+    navController: NavHostController
+) {
+    editor.putBoolean("is_logged_in", true)
+    editor.putString("email", email)
+    if (email == "admin@email.com")  {
+        editor.putBoolean("is_admin", true)
+    }
+    else {
+        editor.putBoolean("is_admin", false)
+    }
+    editor.apply()
+    isLoggedInState.value = true
+    navController.navigate("event_list_screen")
+}
+
+private fun launchGoogleSignIn(
     launcher: ActivityResultLauncher<Intent>,
     context: Context
 ) {
@@ -266,6 +275,7 @@ fun launchSignOut(
     sharedPreferences.edit().apply {
         remove("is_logged_in")
         remove("email")
+        remove("is_admin")
         apply()
     }
 

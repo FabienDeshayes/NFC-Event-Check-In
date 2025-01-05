@@ -47,9 +47,7 @@ class MainActivity : ComponentActivity() {
         sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         auth = Firebase.auth
 
-        val isLoggedInState = mutableStateOf(
-            sharedPreferences.getBoolean("is_logged_in", false)
-        )
+        val isLoggedInState = mutableStateOf(sharedPreferences.getBoolean("is_logged_in", false))
 
         setContent {
             val navController = rememberNavController()

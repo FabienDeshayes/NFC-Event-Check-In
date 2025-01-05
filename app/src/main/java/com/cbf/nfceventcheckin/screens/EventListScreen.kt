@@ -1,5 +1,6 @@
 package com.cbf.nfceventcheckin.screens
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -23,10 +24,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -35,6 +40,14 @@ import com.cbf.nfceventcheckin.Event
 
 @Composable
 fun EventListScreen(events: List<Event>, navController: NavController) {
+    val context = LocalContext.current
+    val isAdmin = remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        val sharedPreferences = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        isAdmin.value = sharedPreferences.getBoolean("is_admin", false)
+    }
+
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -47,35 +60,37 @@ fun EventListScreen(events: List<Event>, navController: NavController) {
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            item {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-
-                    CheckInGuidanceVideoPlayer(
+            if (!isAdmin.value) {
+                item {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier
-                            .size(350.dp)
-                            .padding(32.dp)
-                            .clip(CircleShape)
-                            .border(4.dp, MaterialTheme.colorScheme.primary, CircleShape)
-                    )
-                    Text(
-                        text = "Hold your Phone to the Event Reader to check-in",
-                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
-                        color = MaterialTheme.colorScheme.primary,
-                    )
+                            .fillMaxWidth()
+                    ) {
+
+                        CheckInGuidanceVideoPlayer(
+                            modifier = Modifier
+                                .size(350.dp)
+                                .padding(32.dp)
+                                .clip(CircleShape)
+                                .border(4.dp, MaterialTheme.colorScheme.primary, CircleShape)
+                        )
+                        Text(
+                            text = "Hold your Phone to the Event Reader to check-in",
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
+                            color = MaterialTheme.colorScheme.primary,
+                        )
+                    }
                 }
-            }
 
-            item {
-                HorizontalDividerWithInlineText("Or")
-            }
+                item {
+                    HorizontalDividerWithInlineText("Or")
+                }
 
+            }
             item {
                 Text(
-                    text = "Select your Event to check-in",
+                    text = "Select your Event",
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
                     color = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier.padding(bottom = 8.dp)

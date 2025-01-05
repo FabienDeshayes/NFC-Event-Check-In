@@ -19,7 +19,7 @@ Coming soon
 - Room Database 
 - NFC Technology 
 - ExoPlayer
-- Firebase Authentication
+- Google Authentication
 
 ## Requirements:
 - Android Device with NFC Support
@@ -31,8 +31,15 @@ Coming soon
 3. Deploy to an NFC-enabled Android device.
 4. Ensure you have at least one NFC tag with the correct serial number, or update the serial number in the code.
 
+## Signing In
+- There are two ways to sign in: using your Gmail account or any email address.
+- As the focus of this project is not on email security or verification, no validation is performed. You can enter any value in the email field to proceed.
+- To log in as an admin user and explore the admin flow, use the hardcoded email address: `admin@email.com`.
+- You can also log in using a Gmail account. Note that the Firebase project information is publicly available in this repository because this is a test project. The Firebase account has several restrictions in place, limiting its use to this project only.
+- If you wish to use this project for your own purposes, you will need to create your own Firebase project and generate a `google-services.json` file for it.
+
 ## Testing:
-Currently, the app **cannot be tested on an emulator** due to the lack of NFC support in most emulator environments. All testing must be done manually on an actual Android device with NFC capabilities. Simply tap the NFC tag with your phone to verify the check-in functionality.
+Currently, the NFC functionality **cannot be tested on an emulator** due to the lack of NFC support in most emulator environments. All testing must be done manually on an actual Android device with NFC capabilities. Simply tap the NFC tag with your phone to verify the check-in functionality.
 
 ## Future Improvements:
 - **Centralised Data Storage:** Currently, data is stored locally on the user's device. In future versions, the app will be enhanced to upload check-in data to a central server via an API, allowing for real-time access and better data management by event organisers
