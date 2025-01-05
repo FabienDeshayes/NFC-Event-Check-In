@@ -39,6 +39,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -73,13 +74,24 @@ fun LoginScreen(navController: NavHostController, isLoggedInState: MutableState<
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.fillMaxSize().padding(16.dp),
-            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Icon(imageVector = Icons.Filled.AccountCircle,
+            Row {
+                Image(
+                    painter = painterResource(id = R.drawable.logo_title),
+                    contentDescription = null,
+                    modifier = Modifier.size(120.dp),
+                    colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.primary)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(100.dp))
+
+            Icon(
+                imageVector = Icons.Filled.AccountCircle,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(100.dp)
+                modifier = Modifier.size(80.dp)
             )
             Spacer(modifier = Modifier.height(20.dp))
             SignInWithEmail(navController, isLoggedInState)
