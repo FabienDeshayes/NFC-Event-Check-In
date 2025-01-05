@@ -22,13 +22,6 @@ fun Navigation(
     navController: NavHostController,
     isLoggedInState: MutableState<Boolean>
 ) {
-    LaunchedEffect(isLoggedInState.value) {
-        if (isLoggedInState.value) {
-            navController.navigate("event_list_screen") {
-                popUpTo("login_screen") { inclusive = true }
-            }
-        }
-    }
 
     NavHost(
         navController = navController,
