@@ -3,7 +3,6 @@ package com.cbf.nfceventcheckin
 import android.content.Context
 import android.content.SharedPreferences
 import android.nfc.NfcAdapter
-import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -127,11 +126,11 @@ class MainActivity : ComponentActivity() {
         )
     }
 
-    private fun handleNfcTag(tag: Tag) {
+    private fun handleNfcTag(byteArray: ByteArray) {
         val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         val loggedInEmail = sharedPreferences.getString("email", "")
 
-        val serialNumber = tag.id.joinToString(":") { String.format("%02X", it) }
+        val serialNumber = byteArray.joinToString(":") { String.format("%02X", it) }
 
         Log.d("Main", "Tag Serial number: $serialNumber")
         Log.d("Main", "Logged in as: $loggedInEmail")
@@ -145,9 +144,9 @@ class MainActivity : ComponentActivity() {
 
     private fun enableNfcForegroundDispatch() {
         if (NfcAdapter.ACTION_NDEF_DISCOVERED == intent.action) {
-            val tag: Tag? = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
+            val byteArray: ByteArray? = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID)
             Log.d("Main", "NFC Tag detected")
-            tag?.let {
+            byteArray?.let {
                 Log.d("Main", "NFC Tag discovered and handled.")
                 handleNfcTag(it)
             }
