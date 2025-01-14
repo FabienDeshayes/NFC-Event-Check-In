@@ -42,6 +42,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        nfcAdapter = NfcAdapter.getDefaultAdapter(this)
 
         sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         auth = Firebase.auth
@@ -143,13 +144,17 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun enableNfcForegroundDispatch() {
-        if (NfcAdapter.ACTION_NDEF_DISCOVERED == intent.action) {
-            val byteArray: ByteArray? = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID)
-            Log.d("Main", "NFC Tag detected")
-            byteArray?.let {
-                Log.d("Main", "NFC Tag discovered and handled.")
-                handleNfcTag(it)
+        if (nfcAdapter != null && nfcAdapter?.isEnabled == true) {
+            if (NfcAdapter.ACTION_NDEF_DISCOVERED == intent.action) {
+                val byteArray: ByteArray? = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID)
+                Log.d("Main", "NFC Tag detected")
+                byteArray?.let {
+                    Log.d("Main", "NFC Tag discovered and handled.")
+                    handleNfcTag(it) // Process the NFC tag data
+                }
             }
+        } else {
+            Log.e("Main", "NFC is not supported or enabled on this device.")
         }
     }
 
