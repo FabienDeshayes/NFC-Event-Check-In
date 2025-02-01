@@ -9,8 +9,13 @@ This system is designed for small to medium-sized events such as workshops, semi
 - **Customisable NFC Tag:** The system works with a specific NFC tag but the serial number is hardcoded and can be modified to accommodate different tags for various events.
 - **Cost-Effective:** The app provides a simple, low-cost solution for event attendance tracking, requiring only NFC-enabled smartphones and 1 tag per event - no additional hardware needed.
 
-## Screenshots:
-Coming soon
+## Screenshots and Videos:
+Ordinary user|Admin user
+-------------|--
+<img src="https://github.com/user-attachments/assets/414c78b1-64f1-4096-a82c-990ed9d53849" width="150" /> <img src="https://github.com/user-attachments/assets/f146768b-0bac-427a-9f2a-72b1ebeb5d83" width="150" /> <img src="https://github.com/user-attachments/assets/95370299-fbfb-4ccd-847f-ba9615a702ba" width="150" /> <img src="https://github.com/user-attachments/assets/43553bbe-5ccd-47aa-b693-96e2389e394f" width="150" /> | <img src="https://github.com/user-attachments/assets/b492a11a-be55-4134-85f4-0bea545d922d" width="150" /> 
+
+[Ordinary user video](https://github.com/user-attachments/assets/45f6f672-5c68-40dd-a148-d3003315dbaf) <br/>
+[Admin user video](https://github.com/user-attachments/assets/4a6573c4-7acb-43bd-8f85-c2dd88dd5f2d)
 
 ## Tech stack:
 - Kotlin
