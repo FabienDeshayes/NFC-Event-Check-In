@@ -29,11 +29,11 @@ import com.cbf.nfceventcheckin.Event
 fun AdminScreen(event: Event) {
     val context = LocalContext.current
     val dbHelper = DatabaseHelper(context)
-    val checkedInEmails = remember { mutableStateListOf<String>() }
+    val checkedInUsers = remember { mutableStateListOf<Pair<String, String>>() }
 
     LaunchedEffect(Unit) {
-        checkedInEmails.clear()
-        checkedInEmails.addAll(dbHelper.getAllCheckedInEmails(event.tagSerialNumber))
+        checkedInUsers.clear()
+        checkedInUsers.addAll(dbHelper.getAllCheckedInEmails(event.tagSerialNumber))
     }
 
     Surface(
@@ -53,16 +53,16 @@ fun AdminScreen(event: Event) {
             EventLocation(event)
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = if (checkedInEmails.size > 0) "${checkedInEmails.size} people have checked in" else "No one has checked in yet.",
+                text = if (checkedInUsers.size == 1) "1 person has checked in" else if (checkedInUsers.size > 0) "${checkedInUsers.size} people have checked in" else "No one has checked in yet.",
                 style = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurfaceVariant),
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.height(8.dp))
-            if (checkedInEmails.isNotEmpty()) {
+            if (checkedInUsers.isNotEmpty()) {
                 LazyColumn(modifier = Modifier.fillMaxWidth()) {
-                    items(checkedInEmails) { email ->
-                        CheckedInUserItem(email = email, checkInTime = "12:21 PM")
+                    items(checkedInUsers) { checkedInUser ->
+                        CheckedInUserItem(email = checkedInUser.first, checkInTime = checkedInUser.second)
                     }
                 }
             }

@@ -33,6 +33,9 @@ import com.cbf.nfceventcheckin.ui.theme.NFCEventCheckInTheme
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class MainActivity : ComponentActivity() {
     private var nfcAdapter: NfcAdapter? = null
@@ -130,6 +133,8 @@ class MainActivity : ComponentActivity() {
     private fun handleNfcTag(byteArray: ByteArray) {
         val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         val loggedInEmail = sharedPreferences.getString("email", "")
+        val dateFormat = SimpleDateFormat("hh:mma", Locale.getDefault())
+        val timestamp = dateFormat.format(Calendar.getInstance().time)
 
         val serialNumber = byteArray.joinToString(":") { String.format("%02X", it) }
 
@@ -138,7 +143,7 @@ class MainActivity : ComponentActivity() {
 
         val dbHelper = DatabaseHelper(this)
         if (loggedInEmail != "") {
-            dbHelper.insertNfcTag(serialNumber, loggedInEmail!!)
+            dbHelper.insertNfcTag(serialNumber, loggedInEmail!!, timestamp)
             isCheckedIn = true
         }
     }

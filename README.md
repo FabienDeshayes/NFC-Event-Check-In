@@ -23,13 +23,14 @@ Coming soon
 
 ## Requirements:
 - Android Device with NFC Support
-- 1 NFC Tag
+- 1 NFC Tag 
 
 ## Installation:
 1. Clone the repository.
 2. Build the project using Android Studio.
 3. Deploy to an NFC-enabled Android device.
-4. Ensure you have at least one NFC tag with the correct serial number, or update the serial number in the code.
+4. Ensure you have at least one NFC tag with the correct serial number, or update the serial number in the code's [MockEventData.kt](app/src/main/java/com/cbf/nfceventcheckin/MockEventData.kt) to match your serial number.
+5. Your NFC tag will need to have a random plain/text record added to it to be recognised by this app. You can use an existing app like NFC Tools to write to it.
 
 ## Signing In
 - There are two ways to sign in: using your Gmail account or any email address.
