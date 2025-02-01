@@ -46,6 +46,18 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.close()
     }
 
+    fun isUserCheckedIn(email: String, serialNumber: String): Boolean {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT * FROM event_check_ins WHERE email = ? AND serial_number = ?",
+            arrayOf(email, serialNumber)
+        )
+
+        val isCheckedIn = cursor.count > 0
+        cursor.close()
+        return isCheckedIn
+    }
+
     @SuppressLint("Range")
     fun getAllCheckedInEmails(serialNumber: String): List<Pair<String, String>> {
         val emailList = mutableListOf<Pair<String, String>>()

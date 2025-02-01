@@ -143,15 +143,29 @@ class MainActivity : ComponentActivity() {
 
         val dbHelper = DatabaseHelper(this)
         if (loggedInEmail != "" && serialNumber.isRecognisedEvent()) {
-            dbHelper.insertNfcTag(serialNumber, loggedInEmail!!, timestamp)
-            isCheckedIn = true
-            val editor = sharedPreferences.edit()
-            editor.putString("eventSerialNumber", serialNumber)
-            editor.apply()
+            if (dbHelper.isUserCheckedIn(loggedInEmail!!, serialNumber)) {
+                Log.d("Main", "User has already checked in for this event: $serialNumber")
+                showErrorDialog(
+                    "Already Checked In",
+                    "You have already checked in to this event."
+                )
+            } else {
+                dbHelper.insertNfcTag(serialNumber, loggedInEmail, timestamp)
+                isCheckedIn = true
+
+                val editor = sharedPreferences.edit()
+                editor.putString("eventSerialNumber", serialNumber)
+                editor.apply()
+
+                Log.d("Main", "Check-in successful for $serialNumber")
+            }
         }
         else {
             Log.e("Main", "Unrecognised NFC Event Tag: $serialNumber")
-            showInvalidNfcDialog()
+            showErrorDialog(
+                title = "Unrecognised Event",
+                message = "This tag is not recognised for check-in. Please try a different tag or contact event staff for assistance."
+            )
         }
     }
 
@@ -159,10 +173,10 @@ class MainActivity : ComponentActivity() {
         return events.any { it.tagSerialNumber == this }
     }
 
-    private fun showInvalidNfcDialog() {
+    private fun showErrorDialog(title: String, message: String) {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Unrecognised Event")
-            .setMessage("This tag is not recognised for check-in. Please try a different tag or contact event staff for assistance.")
+        builder.setTitle(title)
+            .setMessage(message)
             .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
             .show()
     }
