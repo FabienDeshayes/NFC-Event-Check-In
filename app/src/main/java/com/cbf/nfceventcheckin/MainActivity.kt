@@ -1,5 +1,6 @@
 package com.cbf.nfceventcheckin
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.nfc.NfcAdapter
@@ -108,7 +109,6 @@ class MainActivity : ComponentActivity() {
             },
             navigationIcon = {
                 if (currentRoute != "event_list_screen") {
-                    println("seda" + navController.currentDestination?.route)
                     IconButton(onClick = { navController.navigateUp() }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -142,10 +142,26 @@ class MainActivity : ComponentActivity() {
         Log.d("Main", "Logged in as: $loggedInEmail")
 
         val dbHelper = DatabaseHelper(this)
-        if (loggedInEmail != "") {
+        if (loggedInEmail != "" && serialNumber.isRecognisedEvent()) {
             dbHelper.insertNfcTag(serialNumber, loggedInEmail!!, timestamp)
             isCheckedIn = true
         }
+        else {
+            Log.e("Main", "Unrecognised NFC Event Tag: $serialNumber")
+            showInvalidNfcDialog()
+        }
+    }
+
+    private fun String.isRecognisedEvent(): Boolean {
+        return events.any { it.tagSerialNumber == this }
+    }
+
+    private fun showInvalidNfcDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Unrecognised Event")
+            .setMessage("This tag is not recognised for check-in. Please try a different tag or contact event staff for assistance.")
+            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            .show()
     }
 
     private fun enableNfcForegroundDispatch() {
