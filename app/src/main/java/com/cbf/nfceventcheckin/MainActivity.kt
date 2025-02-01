@@ -145,6 +145,9 @@ class MainActivity : ComponentActivity() {
         if (loggedInEmail != "" && serialNumber.isRecognisedEvent()) {
             dbHelper.insertNfcTag(serialNumber, loggedInEmail!!, timestamp)
             isCheckedIn = true
+            val editor = sharedPreferences.edit()
+            editor.putString("eventSerialNumber", serialNumber)
+            editor.apply()
         }
         else {
             Log.e("Main", "Unrecognised NFC Event Tag: $serialNumber")
