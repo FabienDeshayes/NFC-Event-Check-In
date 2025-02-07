@@ -18,7 +18,7 @@ val events = listOf(
         imageResource = R.drawable.ic_events_image
     ),
     Event(
-        tagSerialNumber = "04:4E:58:22:C7:19:55",
+        tagSerialNumber = "04:5C:8A:9A:B5:1B:91",
         title = "Tech Innovators Conference 2024",
         time = "10 Feb | 9:00 AM",
         description = "Join top tech experts as they share the latest innovations in the industry. A must-attend for aspiring engineers and entrepreneurs.",
